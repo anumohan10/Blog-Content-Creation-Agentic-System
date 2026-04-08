@@ -20,7 +20,6 @@ This project implements an **Agentic AI System** using **n8n**, designed to gene
 
 ## 🧱 System Architecture
 
-![System Architecture Diagram](assets/architecture.png)
 
 ```mermaid
 graph TD
