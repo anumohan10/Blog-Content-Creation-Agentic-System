@@ -1,12 +1,13 @@
-
 # 📡 Agentic AI System in n8n – Content Creation Assistant
 
 ## 🧠 Overview
-
 This project implements an **Agentic AI System** using **n8n**, designed to generate, summarize, and ideate blog content based on user prompts. The system follows a **controller-agent architecture**, orchestrates specialized agents, integrates built-in tools, and includes a custom formatting tool. The final output is automatically emailed to the user.
 
-## 🚀 Features
+📄 **[View Full Project Documentation](https://docs.google.com/document/d/17WJ3JPm_xcRrnmYbx7cejaBGP9IA5Up0Q2-AWIMhi-E/edit?usp=sharing)**
 
+---
+
+## 🚀 Features
 - Multi-agent routing (WriterAgent, SummaryAgent, IdeaAgent)
 - LLM-powered content generation (OpenAI)
 - Custom blog formatter in Python
@@ -15,17 +16,23 @@ This project implements an **Agentic AI System** using **n8n**, designed to gene
 - Error handling & fallback routing
 - Logging via Gmail archive (memory proxy)
 
+---
+
 ## 🧱 System Architecture
+
+![System Architecture Diagram](assets/architecture.png)
 
 ```mermaid
 graph TD
-    A[User Input (Topic)] --> B[Controller Agent]
+    A["User Input (Topic)"] --> B[Controller Agent]
     B -->|Routes by Topic| C[WriterAgent]
-    B -->|If Includes "idea"| D[IdeaAgent]
-    B -->|If Includes "summary"| E[SummaryAgent]
-    C & D & E --> F[Custom Formatter (Python)]
-    F --> G[Send Email (SMTP)]
+    B -->|If Includes idea| D[IdeaAgent]
+    B -->|If Includes summary| E[SummaryAgent]
+    C & D & E --> F["Custom Formatter (Python)"]
+    F --> G["Send Email (SMTP)"]
 ```
+
+---
 
 ## 🧩 Agents
 
@@ -44,6 +51,8 @@ graph TD
 ### 4. SummaryAgent
 - Summarizes blog content or topics
 
+---
+
 ## 🧰 Tools Used
 
 ### ✅ Built-in Tools (3)
@@ -60,16 +69,20 @@ graph TD
 - **Output**: `json.formatted_prompt`
 - **Edge Case Handling**: Checks for valid text blocks and snippet types
 
-## 🧪 Error Handling
+---
 
+## 🧪 Error Handling
 - The Controller Agent includes a try/except block
 - If the topic is missing or unrecognized, it defaults to `WriterAgent`
 - An `error` field is added to `json` if exceptions occur
 
-## 💾 Memory System
+---
 
+## 💾 Memory System
 - Emails are archived in Gmail → acts as indirect memory log
 - Optionally extend with Notion or Google Sheets for persistent memory
+
+---
 
 ## 📬 Output Sample
 
@@ -87,8 +100,9 @@ graph TD
 </ul>
 ```
 
-## 🔧 Setup Instructions
+---
 
+## 🔧 Setup Instructions
 1. **Clone this repo** or import your n8n workflow JSON
 2. Ensure the following environment:
    - n8n >= v1.100
@@ -101,15 +115,16 @@ graph TD
    - Set recipient email address in SMTP node
 5. Run the workflow via Webhook or Manual trigger
 
-## 📝 Prompt Example
+---
 
+## 📝 Prompt Example
 ```text
 "Generate a full-length blog post on the topic '{{ $json.topic }}'. Format the content using clean HTML. Do not include follow-up questions or links."
 ```
 
+---
 
 ## 📈 Evaluation Highlights
-
 | Category           | Fulfilled? |
 |--------------------|------------|
 | Controller Agent   | ✅          |
@@ -120,12 +135,13 @@ graph TD
 | Error Handling     | ✅          |
 | Clear Demo Output  | ✅          |
 
+---
 
 ## 🧠 Limitations & Future Work
-
 - Currently limited to keyword routing (enhance with NLP)
 - Format improvements for markdown support (optional)
 
-## 📚 Credits
+---
 
-Built with using [n8n](https://n8n.io), OpenAI, and SMTP.
+## 📚 Credits
+Built with ❤️ using [n8n](https://n8n.io), OpenAI, and SMTP.
